@@ -1,0 +1,32 @@
+{
+  "name": "german-helper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --hot --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base build/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cycle/dom": "^12.2.5",
+    "@cycle/http": "^11.0.1",
+    "@cycle/isolate": "^1.4.0",
+    "@cycle/xstream-run": "^3.1.0",
+    "xstream": "^6.3.2"
+  },
+  "devDependencies": {
+    "css-loader": "^0.25.0",
+    "cssnext": "^1.8.4",
+    "postcss-import": "^8.1.2",
+    "postcss-loader": "^0.13.0",
+    "postcss-nested": "^1.0.0",
+    "precss": "^1.4.0",
+    "style-loader": "^0.13.1",
+    "ts-loader": "^0.8.2",
+    "typescript": "^2.0.3",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
+  }
+}
