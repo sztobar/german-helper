@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base build/",
+    "start": "webpack-dev-server --hot --inline --progress --profile --colors --watch --display-error-details --display-cached --port 8888 --content-base src/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -14,6 +14,7 @@
     "@cycle/http": "^11.0.1",
     "@cycle/isolate": "^1.4.0",
     "@cycle/xstream-run": "^3.1.0",
+    "postcss-cssnext": "^2.8.0",
     "xstream": "^6.3.2"
   },
   "devDependencies": {
