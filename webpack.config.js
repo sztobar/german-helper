@@ -1,6 +1,5 @@
 const path = require('path');
-// const precss = require('precss');
-const cssNext = require('cssnext');
+const cssNext = require('postcss-cssnext');
 const postcssImport = require('postcss-import');
 const postcssNested = require('postcss-nested');
 
@@ -8,7 +7,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: './main.ts',
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'src'),
     filename: 'main.js'
   },
   module: {
@@ -24,8 +23,12 @@ module.exports = {
       }
     ],
   },
-  postcss() {
-    return [/*precss,*/ postcssImport, postcssNested, cssNext()];
+  postcss(webpack) {
+    return [
+      postcssImport({addDependencyTo: webpack}),
+      postcssNested(),
+      cssNext()
+    ];
   },
   resolve: {
     root: path.resolve(__dirname, 'src'),
