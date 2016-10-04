@@ -130,7 +130,7 @@ function main(sources: Sources): Sinks {
       return Object.assign({}, inputs, checkboxes)
     })
 
-  const enter$ = sources.DOM.select('.input, .checkbox')
+  const enter$ = sources.DOM.select('.word-form__input, .word-form__checkbox')
     .events('keydown')
     .filter(ev => (ev as KeyboardEvent).keyCode === 13)
 
@@ -155,28 +155,28 @@ function main(sources: Sources): Sinks {
           div(`.word-form.word-form--infinitiv`, [
             button('.word-form__mode', {props: {disabled: mode === 'infinitiv', tabIndex: -1}}, 'infinitiv'),
             input(`#infinitiv.word-form__input`, {attrs: {placeholder: 'infinitiv'}, props: {value: infinitiv}}),
-            div('.word-form__answer', {class: {'answer-hidden': !answersVisible}}, [word.infinitiv])
+            div('.word-form__answer', {class: {'word-form__answer--hidden': !answersVisible}}, [word.infinitiv])
           ]),
           div(`.word-form.word-form--praterium`, [
             button('.word-form__mode', {props: {disabled: mode === 'praterium', tabIndex: -1}}, 'praterium'),
             input(`#praterium.word-form__input`, {attrs: {placeholder: 'praterium'}, props: {value: praterium}}),
-            div('.word-form__answer', {class: {'answer-hidden': !answersVisible}}, [word.praterium])
+            div('.word-form__answer', {class: {'word-form__answer--hidden': !answersVisible}}, [word.praterium])
           ]),
           div(`.word-form.word-form--partizip2`, [
             button('.word-form__mode', {props: {disabled: mode === 'partizip2', tabIndex: -1}}, 'partizip2'),
             input(`#partizip2.word-form__input`, {attrs: {placeholder: 'partizip2'}, props: {value: partizip2}}),
-            div('.word-form__answer', {class: {'answer-hidden': !answersVisible}}, [word.partizip2])
+            div('.word-form__answer', {class: {'word-form__answer--hidden': !answersVisible}}, [word.partizip2])
           ]),
-          span('.word-block', [
-            label(['h', input('#haben.checkbox', {attrs: {type: 'checkbox'}, props: {checked: haben}})]),
-            label(['s', input('#sein.checkbox', {attrs: {type: 'checkbox'}, props: {checked: sein}})]),
+          span('.word-form', [
+            label(['h', input('#haben.word-form__checkbox', {attrs: {type: 'checkbox'}, props: {checked: haben}})]),
+            label(['s', input('#sein.word-form__checkbox', {attrs: {type: 'checkbox'}, props: {checked: sein}})]),
             br(),
-            div({class: {'answer-hidden': !answersVisible}}, [`${word.haben && word.sein ? 'h, s' : word.haben ? 'h' : 's'}`])
+            div('.word-form__answer', {class: {'word-form__answer--hidden': !answersVisible}}, [`${word.haben && word.sein ? 'h, s' : word.haben ? 'h' : 's'}`])
           ]),
           div(`.word-form.word-form--meaning`, [
             button('.word-form__mode', {props: {disabled: mode === 'meaning', tabIndex: -1}}, 'meaning'),
             input(`#meaning.word-form__input`, {attrs: {placeholder: 'meaning'}, props: {value: meaning}}),
-            div('.word-form__answer', {class: {'answer-hidden': !answersVisible}}, [word.meaning])
+            div('.word-form__answer', {class: {'word-form__answer--hidden': !answersVisible}}, [word.meaning])
           ])
         ])
       ])

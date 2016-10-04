@@ -29,8 +29,11 @@ body {
   }
 
   &__answer {
-    color: white;
     display: block;
+
+    &--hidden {
+      color: white;
+    }
 
     &:hover {
       color: black;

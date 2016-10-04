@@ -58,7 +58,7 @@ function WordForm({DOM: domSource, props$} : Sources) : Sinks {
     return div(`.word-form.word-form--${type}`, [
       button('.word-form__mode', {props: {disabled: currentMode === type, tabIndex: -1}}, type),
       input(`#${type}.word-form__input`, {attrs: {placeholder: type}, props: {value: model}}),
-      div('.word-form__answer', {class: {'answer-hidden': !answersVisible}}, [answer])
+      div('.word-form__answer', {class: {'.word-form__input--hidden': !answersVisible}}, [answer])
     ])
   })
 
