@@ -37,7 +37,7 @@ function main(sources: Sources): Sinks {
       return (ev.target as HTMLButtonElement).textContent
     })
 
-  const inputs$ = sources.DOM.select('.input')
+  const inputs$ = sources.DOM.select('.word-form__input')
 
   const focusInputs$ = inputs$
     .events('focus')
@@ -89,7 +89,7 @@ function main(sources: Sources): Sinks {
   const inputModel$ = xs.merge(setInput$, appendInput$, resetInput$)
     .fold((acc: Object, fn) => fn(acc), Object.assign({}, inputsStartVal))
 
-  const setCheckbox$ = sources.DOM.select('.checkbox')
+  const setCheckbox$ = sources.DOM.select('.word-form__checkbox')
     .events('change')
     .map((ev) => {
       const el = (ev.target as HTMLInputElement)
