@@ -14,9 +14,20 @@ body {
   align-items: center;
 }
 
-.word-form {
-  display: inline-block;
-  vertical-align: bottom;
+.container {
+  display: flex;
+}
+
+.word-flags {
+  display: flex;
+  &:hover .flag-form__answer {
+    color: black;
+  }
+}
+
+.word-form,
+.flag-form {
+  align-self: flex-end;
   margin-top: 10px;
 
   &__input {
@@ -29,8 +40,17 @@ body {
   }
 
   &__answer {
+    height: 20px;
     color: white;
     display: block;
+
+    &--corect {
+      color: darkgreen;
+    }
+
+    &--incorrect {
+      color: darkred;
+    }
 
     &:hover {
       color: black;

@@ -3,64 +3,81 @@ import xs, {Stream} from 'xstream';
 import {DOMSource} from '@cycle/dom/xstream-typings';
 import isolate from '@cycle/isolate';
 
-export default (sources, type) => isolate(WordForm)(sources, type);
+import {setString} from '../utils'
 
-type Props = {
-  type: string,
-  answer: string,
-  model: string,
-  mode: string,
-  answersVisible: boolean
-};
+export default (props: Sources) => isolate(WordForm)(props);
+
 type Sources = {
   DOM: DOMSource,
-  props$: Stream<Props>
+  type: string,
+  word$: Stream<Object>,
+  mode$: Stream<string>,
+  answerVisible$: Stream<boolean>,
+  resetField$: Stream<setString>,
+  appendChar$: Stream<setString>
 };
 type Sinks = {
-  DOM: Stream<VNode>,
-  setValue$: Stream<(_: string) => string>,
+  view$: Stream<VNode>,
   mode$: Stream<string>,
-  active$: Stream<string>,
   enterPress$: Stream<any>
 };
 
-function WordForm({DOM: domSource, props$} : Sources, type) : Sinks {
+function WordForm(sources : Sources) : Sinks {
+  const {DOM, type, word$, mode$, answerVisible$, resetField$, appendChar$} = sources;
 
-  const input$ = domSource.select('.word-form__input')
+  const modelProxy$ : Stream<setString> = xs.of(() => '')
+  const model$ = modelProxy$.fold((acc, fn: setString) => fn(acc), '')
 
-  const focusInput$ = input$
+  const input$ = DOM.select('.word-form__input')
+
+  const focusInput$ : Stream<setString> = input$
     .events('focus')
-    .map(ev => (ev.target as Element).id)
+    .mapTo(xs.never())
+    .flatten()
 
   const blurInput$ = input$
     .events('blur')
-    .mapTo(null)
+    .mapTo(appendChar$)
+    .flatten()
 
-  const active$ = xs.merge(focusInput$, blurInput$)
-
-  const enterPress$ = input$
-    .events('keydown')
-    .filter(ev => (ev as KeyboardEvent).keyCode === 13)
-
+  const appendCharWhenActive$ : Stream<setString> = xs.merge(focusInput$, blurInput$)
+    
   const setValue$ = input$
     .events('input')
     .map(ev => (ev.target as HTMLInputElement).value)
     .map((v : string) => (_: string) => v)
 
-  const mode$ = domSource.select('.word-form__mode')
-    .events('click')
-    .map(ev => type)//props$.map(v => v.type))
-    //.flatten()
+  const modelImpl$ = xs.merge(
+    setValue$,
+    appendCharWhenActive$,
+    resetField$,
+  )
+  modelProxy$.imitate(modelImpl$)
 
+  const enterPress$ = input$
+    .events('keydown')
+    .filter(ev => (ev as KeyboardEvent).keyCode === 13)
+
+
+  const setMode$ = DOM.select('.word-form__mode')
+    .events('click')
+    .mapTo(type)
+
+  const answer$ = word$.map(v => v[type])
+
+  const props$ = xs.combine(answer$, model$, mode$, answerVisible$)
 
   const view$ = props$.map(props => {
-    const {type, answer, model, mode, answersVisible} = props;
+    const [answer, model, mode, answerVisible] = props;
     const value = mode !== type ? model : answer; 
 
-    return div(`.word-form.word-form--${type}`, [
+    return div(`.word-form`, [
       button('.word-form__mode', {props: {disabled: mode === type, tabIndex: -1}}, type),
-      input(`#${type}.word-form__input`, {attrs: {placeholder: type}, props: {value}}),
-      div('.word-form__answer', {class: {'answer-hidden': !answersVisible}}, [answer])
+      input(`.word-form__input`, {attrs: {placeholder: type}, props: {value}}),
+      div('.word-form__answer', {class: {
+        'flag-form__answer--correct': answerVisible && answer === value,
+        'flag-form__answer--incorrect': answerVisible && answer !== value,
+      }}, [answer])
     ])
   })
 
@@ -69,10 +86,8 @@ function WordForm({DOM: domSource, props$} : Sources, type) : Sinks {
   //  const vdom$ = view(state$);
 
   return {
-    DOM: view$,
-    setValue$,
-    mode$,
-    active$,
+    view$,
+    mode$: setMode$,
     enterPress$
   }
 }
