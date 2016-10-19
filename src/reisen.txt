@@ -1,0 +1,104 @@
+bilet
+die Fahrkarte
+dworzec
+der Bahnhof
+informacja
+die Auskunft
+rozkład jazdy
+der Fahrplan
+kasa biletowa
+der Fahrkartenschalter
+bilet tam i z powrotem
+die Fahrkarte hin und zurück
+bilet z 50% zniżką
+die Fahrkarte mit 50% Ermäßigung
+przyjazd pociągu
+die Ankunft des Zuges
+przybywać
+ankommen
+odjeżdżać
+abfahren
+opóźnienie
+die Verspätung
+spóźnić się na pociąg
+den Zug verpassen
+wyjść po kogoś na dworzec
+vom Bahnhof abholen
+pociąg odjeżdża z peronu ...
+der Zug fährt vom Bahnsteig ... ab
+hotel
+das Hotel
+zameldować się
+sich anmelden
+recepcja
+die Rezeption
+doba hotelowa
+der Hoteltag
+apartament
+das Appartement
+rezerwacja
+die Buchung|die Reservierung
+rezerwować
+buchen|reserviren
+kosztować
+kosten
+cena
+der Preis
+odwołać rezerwację
+die Reservierung absagen
+potwierdzić rezerwację
+die Reservirung bestätigen
+łącze internetowe
+der Internetanschluß
+klimatyzacja
+die Klimaanlage
+klimatyzowany
+klimatisiert
+telewizor
+der Fernseher
+telefon
+das Telefon
+łazienka
+das Bad
+drogi
+teuer
+tani
+billig
+korzystny cenowo
+preisgünsig
+klusz
+der Schlüssel
+winda
+der Lift
+parter
+das Erdgeschoss
+na parterze
+im Erdgeschoss
+piętro
+der Stock
+pierwsze piętro
+der erste Stock
+drugie piętro
+der zweite Stock
+na 1 piętrze
+im ersten Stock
+na 2 piętrze
+im zweiten Stock
+wypełniać
+ausfüllen
+podpis
+der Unterschrift
+formularz zgłoszeniowy
+das Anmeldeformular
+dowód osobisty
+der Personalausweis
+parking
+der Parkplatz
+bezpłatny
+kostenlos
+pobyt z pełnym wyżywieniem
+die Unterkunft mit Verpflegung
+pokój jednoosobowy
+das Einzelzimmer
+pokód dwuosobowy
+das Doppelzimmer

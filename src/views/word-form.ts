@@ -56,7 +56,13 @@ function WordForm(sources : Sources) : Sinks {
 
   const enterPress$ = input$
     .events('keydown')
+    .map(function(v) {
+      debugger;
+      return v;
+    })
     .filter(ev => (ev as KeyboardEvent).keyCode === 13)
+
+    enterPress$.subscribe(window['list'])
 
 
   const setMode$ = DOM.select('.word-form__mode')
