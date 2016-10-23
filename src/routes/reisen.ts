@@ -39,7 +39,7 @@ export default function main(sources: Sources): Sinks {
   const modeProxy$ = xs.never()
   const mode$ = modeProxy$.startWith('meaning')
 
-  const nextWord$ = xs.merge(nextClick$, mode$)
+  const nextWord$ = xs.merge(nextClick$, mode$).remember()
 
   const word$ = sources.HTTP.select('reisen')
     .flatten()
@@ -66,12 +66,14 @@ export default function main(sources: Sources): Sinks {
   modeProxy$.imitate(modeImpl$)
 
   const answerVisibleImpl$ = xs.merge(
-    // xs.merge(
+    xs.merge(
       germanWordForm.enterPress$,
       meaningWordForm.enterPress$,
-    // ).mapTo(true),
-  ).mapTo(true)
+    ).mapTo(true),
+    nextWord$.mapTo(false),
+  )
   answerVisibleProxy$.imitate(answerVisibleImpl$)
+
 
   const resetFieldImpl$ = xs.merge(
     mode$,
@@ -81,8 +83,8 @@ export default function main(sources: Sources): Sinks {
 
 
   const view$ = xs.combine(
-    germanWordForm.view$,
-    meaningWordForm.view$,
+    germanWordForm.DOM,
+    meaningWordForm.DOM,
   )
 
   return {

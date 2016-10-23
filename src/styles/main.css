@@ -44,7 +44,7 @@ body {
     color: white;
     display: block;
 
-    &--corect {
+    &--correct {
       color: darkgreen;
     }
 

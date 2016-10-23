@@ -16,7 +16,7 @@ type Sources = {
   resetField$: Stream<setBoolean>,
 }
 type Sinks = {
-  view$: Stream<VNode>,
+  DOM: Stream<VNode>,
   enterPress$: Stream<any>
 }
 
@@ -68,7 +68,7 @@ function FlagForm(sources : Sources) : Sinks {
   //  const vdom$ = view(state$);
 
   return {
-    view$,
+    DOM: view$,
     enterPress$
   }
 }

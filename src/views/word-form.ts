@@ -17,7 +17,7 @@ type Sources = {
   appendChar$: Stream<setString>
 };
 type Sinks = {
-  view$: Stream<VNode>,
+  DOM: Stream<VNode>,
   mode$: Stream<string>,
   enterPress$: Stream<any>
 };
@@ -32,13 +32,13 @@ function WordForm(sources : Sources) : Sinks {
 
   const focusInput$ : Stream<setString> = input$
     .events('focus')
-    .mapTo(xs.never())
+    .mapTo(appendChar$)
     .flatten()
 
   const blurInput$ = input$
     .events('blur')
-    .mapTo(appendChar$)
-    .flatten()
+    .map(_ => v => v)
+    // .flatten()
 
   const appendCharWhenActive$ : Stream<setString> = xs.merge(focusInput$, blurInput$)
     
@@ -57,13 +57,9 @@ function WordForm(sources : Sources) : Sinks {
   const enterPress$ = input$
     .events('keydown')
     .map(function(v) {
-      debugger;
       return v;
     })
     .filter(ev => (ev as KeyboardEvent).keyCode === 13)
-
-    enterPress$.subscribe(window['list'])
-
 
   const setMode$ = DOM.select('.word-form__mode')
     .events('click')
@@ -75,14 +71,15 @@ function WordForm(sources : Sources) : Sinks {
 
   const view$ = props$.map(props => {
     const [answer, model, mode, answerVisible] = props;
-    const value = mode !== type ? model : answer; 
+    const disabled = mode === type;
+    const value = !disabled ? model : answer; 
 
     return div(`.word-form`, [
-      button('.word-form__mode', {props: {disabled: mode === type, tabIndex: -1}}, type),
+      button('.word-form__mode', {props: {disabled, tabIndex: -1}}, type),
       input(`.word-form__input`, {attrs: {placeholder: type}, props: {value}}),
       div('.word-form__answer', {class: {
-        'flag-form__answer--correct': answerVisible && answer === value,
-        'flag-form__answer--incorrect': answerVisible && answer !== value,
+        'flag-form__answer--correct': !disabled && answerVisible && answer === value,
+        'flag-form__answer--incorrect': !disabled && answerVisible && answer !== value,
       }}, [answer])
     ])
   })
@@ -92,7 +89,7 @@ function WordForm(sources : Sources) : Sinks {
   //  const vdom$ = view(state$);
 
   return {
-    view$,
+    DOM: view$,
     mode$: setMode$,
     enterPress$
   }

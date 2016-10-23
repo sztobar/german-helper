@@ -22,7 +22,7 @@ Object.assign(window, {
 })
 
 window.onload = () =>
-  run(threeForms, {
+  run(reisen, {
     DOM: makeDOMDriver('#app'),
     HTTP: makeHTTPDriver()
   })

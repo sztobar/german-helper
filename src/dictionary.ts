@@ -43,10 +43,10 @@ export function makePairsDictionary(text: string) {
 }
 
 const pairsTransformation = {
-  0: (acc, german) => {
-    return [{german}, ...acc];
+  0: (acc, meaning) => {
+    return [{meaning}, ...acc];
   },
-  1: ([group, ...rest], meaning) => {
-    return [Object.assign(group, {meaning}), ...rest];
+  1: ([group, ...rest], german) => {
+    return [Object.assign(group, {german}), ...rest];
   },
 }

@@ -66,7 +66,7 @@ tani
 billig
 korzystny cenowo
 preisgünsig
-klusz
+klucz
 der Schlüssel
 winda
 der Lift
@@ -102,3 +102,157 @@ pokój jednoosobowy
 das Einzelzimmer
 pokód dwuosobowy
 das Doppelzimmer
+samochód osobowy
+das Auto|der PKW
+samochód ciężarowy
+der LWK
+bagażnik (na dachu)
+der Gepäckträger
+bagażnik
+der Kofferaum
+skrzynia biegów
+das Schaltgetriebe
+bieg
+der Gang
+chłodnica
+der Kühler
+błotnik
+das Schutzblech
+kierownica
+das Steuer|das Lenkrad
+klakson
+die Autohupe
+trąbić
+hupen
+kierunkowskaz
+der Blinker
+lusterko
+der Spiegel
+nadwozie
+die Karosserie
+podwozie
+das Fahrgestell
+silnik
+der Motor
+rozrusznik
+der Anlasser
+sprzęgło
+die Kupplung
+tłumik
+der Auspufftopf
+zderzak
+die Stoßstange
+wycieraczka
+der Scheibewischer
+koło
+das Rad
+opona
+der Reifen
+ciśnienie w oponach
+der Reifenluftdruck
+kołpak
+die Haube
+kontrolka
+das Kontrolllicht
+licznik
+der Zähler
+prędkościomierz
+das Tachometer
+cofać
+rücken|rückwärts fahren
+zawracać
+umkehren
+hamować
+bremsen
+hamulec
+die Bremse
+naprawa
+die Reparatur
+holować
+schleppen
+naprawiać
+reparieren
+pasek klinowy
+der Keilriemen
+włączać
+einschalten|anmachen
+wyłączać
+ausschalten|ausmachen
+zepsuć się
+kapputgehen
+część zapasowa
+der Ersatzteil
+linka holownicza
+das Schleppseil
+bezpieczny
+sicher
+ostrożny
+vorsichtig
+nieostrożny
+unvorsichtig
+kraksa
+die Panne
+wypadek
+der Unfall
+zderzenie
+der Zussamenstoß
+mijać
+vorbeifahren
+wyprzedzać
+überholen
+chodnik
+der Bürgersteig
+krawężnik
+der Randstein
+objazd
+die Umleitung
+obwodnica
+die Umgehungsstrasse
+opłata
+die Gebühr
+ruch
+der Verkehr
+przśpieszać
+beschleunigen
+zwalniać
+langsamer fahren
+gaśnica
+der Feuerlöscher
+beznzyna
+das Benzin
+tankować
+tanken
+olej napędowy
+der Dieselkrafsoff
+olej
+das Öl
+wymieniać
+wechseln
+spaliny
+die Abgase
+klucz
+der Autoschlüssel
+zamek centralny
+die Zentralverriegelung
+klucz (narzędzie)
+der Schraubenschlüssel
+uszczelka
+die Dichtung
+szyberdach
+das Schiebedach
+pas bezpieczeństwa
+der Sicherheitsgurt
+zapiąć (pas bezp.)
+anlegen
+AS
+die Casco-Versicherung
+OC
+die Haftpflichtverscherung
+nie chce zapalić
+mein Auto will nich zünden|mein Auto will nich starten
+oddać samochód do naprawy
+das Auto zur Reparatur bringen
+pomoc drogowa
+der Pannendienst
+przegląd techniczny
+der Kundendienst

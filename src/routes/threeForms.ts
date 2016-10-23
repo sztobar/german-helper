@@ -97,12 +97,12 @@ export default function main(sources: Sources): Sinks {
 
 
   const view$ = xs.combine(
-    infinitivWordForm.view$,
-    prateriumWordForm.view$,
-    partizip2WordForm.view$,
-    meaningWordForm.view$,
-    habenFlagForm.view$,
-    seinFlagForm.view$,
+    infinitivWordForm.DOM,
+    prateriumWordForm.DOM,
+    partizip2WordForm.DOM,
+    meaningWordForm.DOM,
+    habenFlagForm.DOM,
+    seinFlagForm.DOM,
   )
 
   return {

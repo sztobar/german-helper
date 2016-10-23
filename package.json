@@ -15,7 +15,7 @@
     "@cycle/isolate": "^1.4.0",
     "@cycle/xstream-run": "^3.1.0",
     "postcss-cssnext": "^2.8.0",
-    "xstream": "^6.3.2"
+    "xstream": "^6.6.0"
   },
   "devDependencies": {
     "css-loader": "^0.25.0",
