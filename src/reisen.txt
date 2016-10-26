@@ -230,7 +230,7 @@ wymieniać
 wechseln
 spaliny
 die Abgase
-klucz
+kluczyki do samochodu
 der Autoschlüssel
 zamek centralny
 die Zentralverriegelung
@@ -244,7 +244,7 @@ pas bezpieczeństwa
 der Sicherheitsgurt
 zapiąć (pas bezp.)
 anlegen
-AS
+AC
 die Casco-Versicherung
 OC
 die Haftpflichtverscherung

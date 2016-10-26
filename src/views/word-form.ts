@@ -5,7 +5,7 @@ import isolate from '@cycle/isolate';
 
 import {setString} from '../utils'
 
-export default (props: Sources) => isolate(WordForm)(props);
+export default (props: Sources) => isolate(WordForm)(props)
 
 type Sources = {
   DOM: DOMSource,
@@ -15,32 +15,38 @@ type Sources = {
   answerVisible$: Stream<boolean>,
   resetField$: Stream<setString>,
   appendChar$: Stream<setString>
-};
+}
 type Sinks = {
   DOM: Stream<VNode>,
   mode$: Stream<string>,
   enterPress$: Stream<any>
-};
+}
 
 function WordForm(sources : Sources) : Sinks {
-  const {DOM, type, word$, mode$, answerVisible$, resetField$, appendChar$} = sources;
+  const {DOM, type, word$, mode$, answerVisible$, resetField$, appendChar$} = sources
 
   const modelProxy$ : Stream<setString> = xs.of(() => '')
   const model$ = modelProxy$.fold((acc, fn: setString) => fn(acc), '')
 
   const input$ = DOM.select('.word-form__input')
 
-  const focusInput$ : Stream<setString> = input$
+  const focusInput$ = input$
     .events('focus')
-    .mapTo(appendChar$)
-    .flatten()
+    .mapTo(true)
 
   const blurInput$ = input$
     .events('blur')
-    .map(_ => v => v)
-    // .flatten()
+    .mapTo(false)
 
   const appendCharWhenActive$ : Stream<setString> = xs.merge(focusInput$, blurInput$)
+    .map(v => { // TODO: if crusade
+      if (v) {
+        return appendChar$
+      } else {
+        return xs.never()
+      }
+    })
+    .flatten()
     
   const setValue$ = input$
     .events('input')

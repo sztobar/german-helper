@@ -5,6 +5,7 @@ import {HTTPSource} from '@cycle/http/xstream-typings'
 
 import {makePairsDictionary as makeDictionary} from '../dictionary'
 import WordForm from '../views/word-form'
+import CharBtns from '../views/char-btns'
 
 type Sources = {
   DOM: DOMSource,
@@ -18,17 +19,20 @@ type Sinks = {
 export default function main(sources: Sources): Sinks {
   const {DOM} = sources
 
-  const appendChar$ = DOM.select('.add-char')
+  // const appendChar$ = DOM.select('.add-char')
+  //   .events('mousedown')
+  //   .map((ev) => {
+  //     ev.preventDefault()
+  //     return (ev.target as HTMLButtonElement).textContent
+  //   })
+  //   .map(char => v => v + char)
+
+  const nextClick$ = DOM.select('.next')
     .events('mousedown')
     .map((ev) => {
       ev.preventDefault()
-      return (ev.target as HTMLButtonElement).textContent
+      return ''
     })
-    .map(char => v => v + char)
-
-  const nextClick$ = DOM.select('.next')
-    .events('click')
-    .mapTo('')
 
   const resetFieldProxy$ = xs.never()
   const resetField$ = resetFieldProxy$.map(() => () => '')
@@ -39,7 +43,9 @@ export default function main(sources: Sources): Sinks {
   const modeProxy$ = xs.never()
   const mode$ = modeProxy$.startWith('meaning')
 
-  const nextWord$ = xs.merge(nextClick$, mode$).remember()
+  const secondEnter$ = xs.never()
+
+  const nextWord$ = xs.merge(nextClick$, mode$, secondEnter$).remember()
 
   const word$ = sources.HTTP.select('reisen')
     .flatten()
@@ -56,6 +62,10 @@ export default function main(sources: Sources): Sinks {
     })
     .flatten()
 
+  const charBtns = CharBtns({DOM})
+
+  const {appendChar$} = charBtns
+
   const germanWordForm = WordForm({type: 'german', DOM, word$, mode$, answerVisible$, appendChar$, resetField$})
   const meaningWordForm = WordForm({type: 'meaning', DOM, word$, mode$, answerVisible$, appendChar$, resetField$})
 
@@ -65,38 +75,47 @@ export default function main(sources: Sources): Sinks {
   )
   modeProxy$.imitate(modeImpl$)
 
+  const enterPresses$ = xs.merge(
+    germanWordForm.enterPress$,
+    meaningWordForm.enterPress$,
+  ) 
+
   const answerVisibleImpl$ = xs.merge(
-    xs.merge(
-      germanWordForm.enterPress$,
-      meaningWordForm.enterPress$,
-    ).mapTo(true),
+    enterPresses$.mapTo(true),
     nextWord$.mapTo(false),
   )
   answerVisibleProxy$.imitate(answerVisibleImpl$)
 
+  const secondEnterImpl$ = answerVisible$.map(v => {
+    if (v) {  // TODO: if crusade
+      return enterPresses$ 
+    } else {
+      return xs.never()
+    }
+  })
+  .flatten()
+  secondEnter$.imitate(secondEnterImpl$)
 
-  const resetFieldImpl$ = xs.merge(
-    mode$,
-    nextClick$
-  )
-  resetFieldProxy$.imitate(resetFieldImpl$)
-
+  // const resetFieldImpl$ = xs.merge(
+  //   mode$,
+  //   nextClick$
+  // )
+  // resetFieldProxy$.imitate(resetFieldImpl$)
+  resetFieldProxy$.imitate(xs.merge(nextClick$, mode$, secondEnter$))
 
   const view$ = xs.combine(
+    charBtns.DOM,
     germanWordForm.DOM,
     meaningWordForm.DOM,
   )
 
   return {
     DOM: view$.map(views => {
-      const [germanView, prateriumView] = views
+      const [charBtns, germanView, prateriumView] = views
       
       return div([
         div([
-          button('#ä.add-char', 'ä'),
-          button('#ö.add-char', 'ö'),
-          button('#ü.add-char', 'ü'),
-          button('#ß.add-char', 'ß'),
+          charBtns,
           button('.next', {style: {float: 'right'}}, 'next')
         ]),
         div('.container', {style: {clear: 'both'}}, [
